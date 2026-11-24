@@ -1,0 +1,46 @@
+{
+  "table": "orders",
+  "predicate": { "op": "eq", "column": "amount", "value": 250 },
+  "changeLog": [
+    {
+      "zoneId": "z2",
+      "operation": "UPDATE",
+      "columns": ["amount"],
+      "pageVersionBefore": 1,
+      "pageVersionAfter": 2,
+      "note": "更新只修改了数据页，zone map 未同步"
+    }
+  ],
+  "zones": [
+    {
+      "zoneId": "z1",
+      "totalRows": 1000,
+      "pageVersion": 3,
+      "rowVersion": 3,
+      "columns": {
+        "amount": { "min": 10, "max": 100, "nullCount": 0, "nonNullRows": 1000, "indexVersion": 3 }
+      }
+    },
+    {
+      "zoneId": "z2",
+      "totalRows": 1000,
+      "pageVersion": 2,
+      "rowVersion": 2,
+      "columns": {
+        "amount": { "min": 1, "max": 99, "nullCount": 0, "nonNullRows": 1000, "indexVersion": 1 }
+      },
+      "pageStats": {
+        "amount": { "min": 1, "max": 250 }
+      }
+    },
+    {
+      "zoneId": "z3",
+      "totalRows": 500,
+      "pageVersion": 1,
+      "rowVersion": 1,
+      "columns": {
+        "amount": { "min": 200, "max": 300, "nullCount": 10, "nonNullRows": 490, "indexVersion": 1 }
+      }
+    }
+  ]
+}
